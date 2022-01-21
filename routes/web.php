@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Mail\MensagemTesteMail;
 
@@ -26,4 +27,6 @@ Route::resource('tarefa', 'App\Http\Controllers\TarefaController');
 
 Route::get('/mensagem-teste', function() {
    return new MensagemTesteMail();
+   // Mail::to('contato.curso.laravel2022@gmail.com')->send(new MensagemTesteMail());
+    //return 'E-mail enviando com sucesso';
 });
