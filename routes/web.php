@@ -19,14 +19,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home')
+    ->middleware('verified');
 
-Route::resource('tarefa', 'App\Http\Controllers\TarefaController');
+Route::resource('tarefa', 'App\Http\Controllers\TarefaController')
+    ->middleware('verified');
 
-Route::get('/mensagem-teste', function() {
-   return new MensagemTesteMail();
-   // Mail::to('contato.curso.laravel2022@gmail.com')->send(new MensagemTesteMail());
+Route::get('/mensagem-teste', function () {
+    return new MensagemTesteMail();
+    // Mail::to('contato.curso.laravel2022@gmail.com')->send(new MensagemTesteMail());
     //return 'E-mail enviando com sucesso';
 });
